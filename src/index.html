@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="<%= htmlWebpackPlugin.options.config.lang %>">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <title><%= htmlWebpackPlugin.options.config.title %></title>
+  <!-- The following line is needed for React material-ui framework to enable custom styling with regular CSS: -->
+  <noscript id="jss-insertion-point"></noscript>
+  <!-- Styles -->
+  <% for (var css in htmlWebpackPlugin.files.css) { %>
+  <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+  <% } %>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+</head>
+<body>
+  <!-- Single Page App Mounting Point -->
+  <div id="root"></div>
+  <!-- Webpack manifest -->
+  <%= htmlWebpackPlugin.files.webpackManifest %>
+  <!-- Window variables -->
+  <% if (htmlWebpackPlugin.options.window) { %>
+  <script>
+    <% for (var varName in htmlWebpackPlugin.options.window) { %>
+      window['<%=varName%>'] = <%= JSON.stringify(htmlWebpackPlugin.options.window[varName]) %>;
+    <% } %>
+  </script>
+  <% } %>
+  <!-- Scripts -->
+  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+  <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+  <% } %>
+</body>
+</html>

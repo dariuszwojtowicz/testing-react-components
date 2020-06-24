@@ -1,0 +1,16 @@
+.container {
+  font-family: 'Open Sans', Roboto, Arial, sans-serif;
+  min-width: 400px;
+}
+
+.main {
+  padding: 8px;
+}
+
+.appBar {
+  height: 64px;
+}
+
+.grow {
+  flex-grow: 1;
+}

@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    // target latest version of ECMAScript
+    "target": "esnext",
+    // search under node_modules for non-relative imports
+    "moduleResolution": "node",
+    // enable dynamic imports
+    "module": "esnext",
+    // don't emit; allow Babel to transform files
+    "noEmit": true,
+    // Process & infer types from .js files.
+    "allowJs": true,
+    // import non-ES modules as default imports
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    // enable decorators
+    "experimentalDecorators": true,
+    // emit source maps
+    "sourceMap": true,
+    // add some strictness
+    "strict": true,
+    "strictNullChecks": false,
+    // support react (enable jsx in tsx)
+    "jsx": "react",
+    "skipLibCheck": true
+  },
+  "include": [
+    "src"
+  ]
+}
