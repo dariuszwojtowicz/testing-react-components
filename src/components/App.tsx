@@ -2,6 +2,7 @@ import {AppBar, Toolbar} from '@material-ui/core';
 import * as React from 'react';
 import styles from './App.css';
 import { UserInfoBasic } from "./UserInfoBasic";
+import {UserInfoRedux} from "./UserInfoRedux";
 
 const user = {
   name: 'Darek',
@@ -22,6 +23,7 @@ export const App: React.FunctionComponent = () => (
     </AppBar>
     <main className={styles.main}>
       <UserInfoBasic user={user} />
+      <UserInfoRedux />
     </main>
   </div>
 );

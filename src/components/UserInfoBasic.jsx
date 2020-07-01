@@ -1,6 +1,6 @@
 import {Paper, Typography} from '@material-ui/core';
 import React, { useState } from 'react';
-import * as styles from './UserInfoBasic.css';
+import * as styles from './UserInfo.css';
 import Button from "@material-ui/core/Button";
 
 export const UserInfoBasic = ({ user }) => {
@@ -16,18 +16,15 @@ export const UserInfoBasic = ({ user }) => {
   )
 
   const getUserFullName = () => `${user.name} ${user.lastName}`;
-
   const toggleDetails = () => setShowDetails(!showDetails);
 
   return (
-    <div>
-      <Paper square={true} className={styles.paper}>
-        <Typography variant="h4">Info about user: {getUserFullName()}</Typography>
-        <p>First name: {user.name}</p>
-        <p>Last name: {user.lastName}</p>
-        <Button type="button" onClick={toggleDetails}>{showDetails ? 'Hide' : 'Show'} user details</Button>
-        {showDetails && renderUserDetails()}
-      </Paper>
-    </div>
+    <Paper square={true} className={styles.paper}>
+      <Typography variant="h4">Info about user: {getUserFullName()}</Typography>
+      <p>First name: {user.name}</p>
+      <p>Last name: {user.lastName}</p>
+      <Button style={{'border': '1px solid grey'}} onClick={toggleDetails}>{showDetails ? 'Hide' : 'Show'} user details</Button>
+      {showDetails && renderUserDetails()}
+    </Paper>
   );
 };
