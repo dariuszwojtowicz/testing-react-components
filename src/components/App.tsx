@@ -3,6 +3,8 @@ import * as React from 'react';
 import styles from './App.css';
 import { UserInfoBasic } from "./UserInfoBasic";
 import {UserInfoRedux} from "./UserInfoRedux";
+import {UserInfoReduxRouter} from "./UserInfoReduxRouter";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 const user = {
   name: 'Darek',
@@ -22,8 +24,19 @@ export const App: React.FunctionComponent = () => (
       </Toolbar>
     </AppBar>
     <main className={styles.main}>
+      Basic
       <UserInfoBasic user={user} />
+      <hr />
+      Redux
       <UserInfoRedux />
+      <hr />
+      Redux and Router
+      <BrowserRouter>
+         <Switch>
+          <Route exact path="/profile" component={UserInfoReduxRouter} />
+          <Route exact path="/users/:id" component={UserInfoReduxRouter} />
+        </Switch>
+      </BrowserRouter>
     </main>
   </div>
 );

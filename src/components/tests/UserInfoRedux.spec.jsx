@@ -20,7 +20,7 @@ const store = mockStore({
 });
 store.dispatch = jest.fn(dispatchMock);
 
-describe('UserInfoBasic', () => {
+describe('UserInfoRedux', () => {
   describe('Initial state', () => {
     const wrapper = mount(
       <Provider store={store}>
@@ -59,7 +59,7 @@ describe('UserInfoBasic', () => {
       expect(wrapper.find(Button).text()).toEqual('Hide user details');
     });
 
-    test(`should render 'Hide user details' button`, () => {
+    test(`should update user email in store after input value change`, () => {
       // when
       wrapper.find('input#email').simulate('change', { target: { value: 'new@email.com' }});
 
