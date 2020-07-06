@@ -1,4 +1,7 @@
-export const userData = {
+import {User} from "../../models/User";
+import {Action} from "redux";
+
+export const userData: User = {
   id: 1,
   name: 'Darek',
   lastName: 'Wójtowicz',
@@ -7,7 +10,7 @@ export const userData = {
   email: 'dariusz.wojtowicz@hotmail.com'
 };
 
-export const usersData = [
+export const usersData: User[] = [
   {
     ...userData
   },
@@ -29,7 +32,7 @@ export const usersData = [
   },
 ]
 
-export const currentUser = (state = userData, action) => {
+export const currentUser = (state: User = userData, action: { type: string, email?: string }) => {
   switch (action.type) {
     case 'UPDATE_EMAIL':
       return {
@@ -41,6 +44,6 @@ export const currentUser = (state = userData, action) => {
   }
 };
 
-export const users = (state = usersData, action) => {
+export const users = (state: User[] = usersData, action: Action ) => {
   return state;
 };

@@ -4,6 +4,7 @@ import styles from './App.css';
 import { UserInfoBasic } from "./UserInfoBasic";
 import {UserInfoRedux} from "./UserInfoRedux";
 import {UserInfoReduxRouter} from "./UserInfoReduxRouter";
+import {UserInfoReduxRouterTs} from "./UserInfoReduxRouterTs";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 const user = {
@@ -35,6 +36,14 @@ export const App: React.FunctionComponent = () => (
          <Switch>
           <Route exact path="/profile" component={UserInfoReduxRouter} />
           <Route exact path="/users/:id" component={UserInfoReduxRouter} />
+        </Switch>
+      </BrowserRouter>
+      <hr />
+      Redux, Router and Typescript
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/profile" component={UserInfoReduxRouterTs} />
+          <Route exact path="/users/:id" component={UserInfoReduxRouterTs} />
         </Switch>
       </BrowserRouter>
     </main>
