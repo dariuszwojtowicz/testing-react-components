@@ -7,8 +7,9 @@ import {connect} from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import {RootState} from "../redux/reducers";
 import {Dispatch} from "redux";
-import { match as Match } from 'react-router';
+import {match as Match, withRouter} from 'react-router';
 import {User} from "../models/User";
+import {Location} from 'history';
 
 const getCurrentUser = (state: RootState) => state.currentUser;
 const getUsers = (state: RootState) => state.users;
@@ -23,13 +24,10 @@ export interface UserInfoReduxRouterTsProps {
   users: User[];
   updateEmail: (email: string) => UpdateEmailAction;
   location: Location;
-  match: Match<{
-    id: string
-  }>;
 }
 
 const UserInfoReduxRouterTsComponent: React.FC<UserInfoReduxRouterTsProps> = (
-{ currentUser, users, updateEmail, location, match }
+{ currentUser, users, updateEmail, location }
 ) => {
   const [showDetails, setShowDetails] = useState(false);
 
@@ -57,12 +55,13 @@ const UserInfoReduxRouterTsComponent: React.FC<UserInfoReduxRouterTsProps> = (
       updateEmail(event.target.value);
     }
   }
+  const getUserId = (): number => parseInt(location.pathname.split('users/')[1], 10);
 
   let userData: User = null;
   if (location.pathname === '/profile') {
     userData = currentUser;
   } else {
-    const foundUser = users.find((user: User) => user.id == parseInt(match.params.id, 10));
+    const foundUser = users.find((user: User) => user.id == getUserId());
     if (foundUser) {
       userData = foundUser;
     }
@@ -82,8 +81,8 @@ const UserInfoReduxRouterTsComponent: React.FC<UserInfoReduxRouterTsProps> = (
   return (
     <Paper square={true} className={styles.paper}>
       {userData && renderUserInfo()}
-      {!userData && <h3>User with id: {match.params.id} does not exist</h3>}
+      {!userData && <h3>User with id {getUserId()} does not exist</h3>}
     </Paper>
   );
 };
-export const UserInfoReduxRouterTs = connect(mapStateToProps, mapDispatchToProps)(UserInfoReduxRouterTsComponent);
+export const UserInfoReduxRouterTs = withRouter(connect(mapStateToProps, mapDispatchToProps)(UserInfoReduxRouterTsComponent));

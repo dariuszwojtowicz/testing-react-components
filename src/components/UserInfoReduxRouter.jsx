@@ -66,7 +66,7 @@ const UserInfoReduxRouterComponent = ({ currentUser, users, updateEmail, locatio
   return (
     <Paper square={true} className={styles.paper}>
       {userData && renderUserInfo()}
-      {!userData && <h3>User with id: {match.params.id} does not exist</h3>}
+      {!userData && <h3>User with id {match.params.id} does not exist</h3>}
     </Paper>
   );
 };

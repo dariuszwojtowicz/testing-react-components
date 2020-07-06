@@ -3,10 +3,10 @@ import React from 'react';
 import Button from "@material-ui/core/Button";
 import {Provider} from "react-redux";
 import configureStore from 'redux-mock-store';
-import {UserInfoReduxRouter} from "../UserInfoReduxRouter";
 import {userData, usersData} from "../../redux/reducers/users";
 import {createLocation} from 'history';
 import {UserInfoReduxRouterTs} from "../UserInfoReduxRouterTs";
+import {MemoryRouter} from "react-router";
 
 const getStore = () => {
   const mockStore = configureStore([]);
@@ -14,7 +14,10 @@ const getStore = () => {
     currentUser: userData,
     users: usersData
   });
-  const dispatchMock = () => Promise.resolve({});
+  const dispatchMock = (): any => Promise.resolve({
+    currentUser: null,
+    users: null
+  });
   store.dispatch = jest.fn(dispatchMock);
   return store;
 }
@@ -23,20 +26,13 @@ describe('UserInfoReduxRouterTs', () => {
 
   describe('Profile page', () => {
     const path = `/profile`;
-    const match = {
-      isExact: true,
-      path,
-      url: path
-    };
-    const location = createLocation(match.url);
     const store = getStore();
     const wrapper = mount(
-      <Provider store={store}>
-        <UserInfoReduxRouterTs
-          match={match}
-          location={location}
-        />
-      </Provider>,
+      <MemoryRouter initialEntries={[path]}>
+        <Provider store={store}>
+          <UserInfoReduxRouterTs />
+        </Provider>
+      </MemoryRouter>,
     { context: { store } }
     );
 
@@ -62,22 +58,14 @@ describe('UserInfoReduxRouterTs', () => {
   });
 
   describe('Users page', () => {
-    const path = `/users/:id`;
-    const match = {
-      isExact: true,
-      path,
-      url: path.replace(':id', '2'),
-      params: { id: '2' }
-    };
-    const location = createLocation(match.url);
+    const path = `/users/2`;
     const store = getStore();
     const wrapper = mount(
-      <Provider store={store}>
-        <UserInfoReduxRouterTs
-          match={match}
-          location={location}
-        />
-      </Provider>,
+      <MemoryRouter initialEntries={[path]}>
+        <Provider store={store}>
+          <UserInfoReduxRouterTs />
+        </Provider>
+      </MemoryRouter>,
       { context: { store } }
     );
     describe('Initial state', () => {
