@@ -23,7 +23,7 @@ describe('UserInfoBasic', () => {
     });
 
     test('should not render details', () => {
-      expect(wrapper.find('#userDetails').length).toEqual(0);
+      expect(wrapper.findWhere((n) => n.text() === 'Login: dariuszwojtowicz').length).toEqual(0);
     });
 
     test(`should render 'Show user details' button`, () => {
@@ -38,7 +38,7 @@ describe('UserInfoBasic', () => {
     wrapper.find(Button).simulate('click');
 
     test(`should render details`, () => {
-      expect(wrapper.find('#userDetails').length).toEqual(1);
+      expect(wrapper.findWhere((n) => n.text() === 'Login: dariuszwojtowicz').length).toEqual(1);
     });
 
     test(`should render 'Hide user details' button`, () => {

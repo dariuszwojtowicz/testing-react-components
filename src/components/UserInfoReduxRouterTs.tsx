@@ -32,7 +32,7 @@ const UserInfoReduxRouterTsComponent: React.FC<UserInfoReduxRouterTsProps> = (
   const [showDetails, setShowDetails] = useState(false);
 
   const renderUserDetails = () => (
-    <div id="userDetails" className={styles.details}>
+    <div className={styles.details}>
       <Typography variant="h5">Details</Typography>
       <p>Login: {userData.login}</p>
       <p>Age: {userData.age}</p>
@@ -46,7 +46,7 @@ const UserInfoReduxRouterTsComponent: React.FC<UserInfoReduxRouterTsProps> = (
         disabled={location.pathname !== '/profile'}
       />
     </div>
-  )
+  );
 
   const getUserFullName = () => `${userData.name} ${userData.lastName}`;
   const toggleDetails = () => setShowDetails(!showDetails);
@@ -54,18 +54,21 @@ const UserInfoReduxRouterTsComponent: React.FC<UserInfoReduxRouterTsProps> = (
     if (location.pathname === '/profile') {
       updateEmail(event.target.value);
     }
-  }
+  };
   const getUserId = (): number => parseInt(location.pathname.split('users/')[1], 10);
-
-  let userData: User = null;
-  if (location.pathname === '/profile') {
-    userData = currentUser;
-  } else {
-    const foundUser = users.find((user: User) => user.id == getUserId());
-    if (foundUser) {
-      userData = foundUser;
+  const getUserData = (): User => {
+    if (location.pathname === '/profile') {
+      return currentUser;
+    } else {
+      const foundUser = users.find((user: User) => user.id == getUserId());
+      if (foundUser) {
+        return foundUser;
+      }
     }
-  }
+    return null;
+  };
+
+  const userData: User = getUserData();
 
   const renderUserInfo = () => (
     <>

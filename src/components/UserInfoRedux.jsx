@@ -14,7 +14,7 @@ const UserInfoReduxComponent = ({ currentUser, updateEmail }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   const renderUserDetails = () => (
-    <div id="userDetails" className={styles.details}>
+    <div className={styles.details}>
       <Typography variant="h5">Details</Typography>
       <p>Login: {currentUser.login}</p>
       <p>Age: {currentUser.age}</p>

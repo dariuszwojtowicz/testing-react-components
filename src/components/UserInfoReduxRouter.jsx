@@ -18,7 +18,7 @@ const UserInfoReduxRouterComponent = ({ currentUser, users, updateEmail, locatio
   const [showDetails, setShowDetails] = useState(false);
 
   const renderUserDetails = () => (
-    <div id="userDetails" className={styles.details}>
+    <div className={styles.details}>
       <Typography variant="h5">Details</Typography>
       <p>Login: {userData.login}</p>
       <p>Age: {userData.age}</p>
@@ -32,7 +32,7 @@ const UserInfoReduxRouterComponent = ({ currentUser, users, updateEmail, locatio
         disabled={location.pathname !== '/profile'}
       />
     </div>
-  )
+  );
 
   const getUserFullName = () => `${userData.name} ${userData.lastName}`;
   const toggleDetails = () => setShowDetails(!showDetails);
@@ -40,17 +40,20 @@ const UserInfoReduxRouterComponent = ({ currentUser, users, updateEmail, locatio
     if (location.pathname === '/profile') {
       updateEmail(event.target.value);
     }
-  }
-
-  let userData = null;
-  if (location.pathname === '/profile') {
-    userData = currentUser;
-  } else {
-    const foundUser = users.find((user) => user.id == match.params.id);
-    if (foundUser) {
-      userData = foundUser;
+  };
+  const getUserData = () => {
+    if (location.pathname === '/profile') {
+      return currentUser;
+    } else {
+      const foundUser = users.find((user) => user.id == match.params.id);
+      if (foundUser) {
+        return foundUser;
+      }
     }
-  }
+    return null;
+  };
+
+  const userData = getUserData();
 
   const renderUserInfo = () => (
     <>

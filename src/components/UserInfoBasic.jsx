@@ -7,7 +7,7 @@ export const UserInfoBasic = ({ user }) => {
   const [showDetails, setShowDetails] = useState(false);
 
   const renderUserDetails = () => (
-    <div id="userDetails" className={styles.details}>
+    <div className={styles.details}>
       <Typography variant="h5">Details</Typography>
       <p>Login: {user.login}</p>
       <p>Email: {user.email}</p>
