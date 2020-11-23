@@ -38,7 +38,12 @@ describe('UserInfoReduxRouterTs', () => {
 
     describe('Initial state', () => {
       test('should render header with full name of current user', () => {
-        expect(wrapper.find('h4#header').text()).toContain('Info about user: Darek Wójtowicz (id: 1)');
+        expect(wrapper
+          .findWhere(
+            (n) => n.text().includes('Info about user:')
+          ).find('h4').text()
+        )
+          .toContain('Darek Wójtowicz (id: 1)');
       });
     });
 
@@ -46,7 +51,7 @@ describe('UserInfoReduxRouterTs', () => {
       wrapper.find(Button).simulate('click');
       test(`should update user email in store after input value change`, () => {
         // when
-        wrapper.find('input#email').simulate('change', { target: { value: 'new@email.com' }});
+        wrapper.find('input').simulate('change', { target: { value: 'new@email.com' }});
 
         // then
         expect(store.dispatch).toHaveBeenCalledWith( {
@@ -70,7 +75,12 @@ describe('UserInfoReduxRouterTs', () => {
     );
     describe('Initial state', () => {
       test('should render header with full name of user with id 2', () => {
-        expect(wrapper.find('h4#header').text()).toContain('Info about user: John Random (id: 2)');
+        expect(wrapper
+          .findWhere(
+            (n) => n.text().includes('Info about user:')
+          ).find('h4').text()
+        )
+          .toContain('John Random (id: 2)');
       });
     });
 
@@ -78,7 +88,7 @@ describe('UserInfoReduxRouterTs', () => {
       wrapper.find(Button).simulate('click');
       test(`should not update user email on users page`, () => {
         // when
-        wrapper.find('input#email').simulate('change', { target: { value: 'new@email.com' }});
+        wrapper.find('input').simulate('change', { target: { value: 'new@email.com' }});
 
         // then
         expect(store.dispatch).toBeCalledTimes(0);

@@ -38,7 +38,6 @@ const UserInfoReduxRouterTsComponent: React.FC<UserInfoReduxRouterTsProps> = (
       <p>Age: {userData.age}</p>
       <TextField
         fullWidth
-        id="email"
         type="text"
         label="Email"
         value={userData.email}
@@ -72,7 +71,7 @@ const UserInfoReduxRouterTsComponent: React.FC<UserInfoReduxRouterTsProps> = (
 
   const renderUserInfo = () => (
     <>
-      <Typography id="header" variant="h4">Info about user: {getUserFullName()} (id: {userData.id})</Typography>
+      <Typography variant="h4">Info about user: {getUserFullName()} (id: {userData.id})</Typography>
       <p>First name: {userData.name}</p>
       <p>Last name: {userData.lastName}</p>
       <Button style={{'border': '1px solid grey'}} onClick={toggleDetails}>{showDetails ? 'Hide' : 'Show'} user

@@ -61,7 +61,7 @@ describe('UserInfoRedux', () => {
 
     test(`should update user email in store after input value change`, () => {
       // when
-      wrapper.find('input#email').simulate('change', { target: { value: 'new@email.com' }});
+      wrapper.find('input').simulate('change', { target: { value: 'new@email.com' }});
 
       // then
       expect(store.dispatch).toHaveBeenCalledWith( {

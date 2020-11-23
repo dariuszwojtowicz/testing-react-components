@@ -18,7 +18,7 @@ const UserInfoReduxComponent = ({ currentUser, updateEmail }) => {
       <Typography variant="h5">Details</Typography>
       <p>Login: {currentUser.login}</p>
       <p>Age: {currentUser.age}</p>
-      <TextField id="email" type="text" label="Email" value={currentUser.email} onChange={changeEmail} />
+      <TextField type="text" label="Email" value={currentUser.email} onChange={changeEmail} />
     </div>
   )
 
